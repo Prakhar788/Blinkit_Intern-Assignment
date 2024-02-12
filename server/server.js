@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const multer=require('multer')
+const path = require('path');
+const upload = multer({ dest: path.join(__dirname, 'uploads/') });
+
 
 const app = express();
 const port = 3001;
@@ -74,6 +76,7 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign({ username: user.username }, 'secret-key', { expiresIn: '5h' });
+
       res.status(200).json({ token });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
@@ -93,7 +96,8 @@ app.post('/upload', authenticateToken, upload.single('image'), async (req, res) 
         const imageUrl = `http://localhost:3001/uploads/${req.file.filename}`;
 
         // Find the user
-        const existingUser = await User.findById(user._id);
+        const existingUser = await User.findOne({ username: user.username });
+
 
         if (!existingUser) {
             return res.status(404).json({ message: 'User not found.' });
@@ -122,9 +126,28 @@ app.post('/upload', authenticateToken, upload.single('image'), async (req, res) 
     }
 });
 
+app.get('/images', async (req, res) => {
+  try {
+    console.log('Received GET request to /images'); // Log the request
+    // Find all users with their uploaded images
+    const usersWithImages = await User.find({}, { username: 1, uploadedImages: 1 });
 
+    // Map the response to include only necessary information
+    const formattedImages = usersWithImages.map((user) => ({
+      username: user.username,
+      uploadedImages: user.uploadedImages.map((image) => ({
+        imageUrl: image.imageUrl,
+        uploadedBy: image.uploadedBy,
+        timestamp: image.timestamp,
+      })),
+    }));
 
-
+    res.status(200).json(formattedImages);
+  } catch (error) {
+    console.error('Error fetching images:', error.message);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
   
 

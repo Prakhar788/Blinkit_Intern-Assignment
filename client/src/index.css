@@ -1,0 +1,55 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav {
+    background-color: #d9534f; /* Red background color */
+    padding: 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black; /* White text color for links */
+  }
+  
+  button {
+    background-color: #d9534f; /* Red background color for buttons */
+    color: black; /* White text color for buttons */
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+  }
+  
+  .Toastify__toast--success {
+    background-color: #5bc0de; /* Bootstrap's info color for success toasts */
+  }
+  
+  .Toastify__toast--error {
+    background-color: #d9534f; /* Red background color for error toasts */
+  }
+  
+  .Toastify__toast-body {
+    color: #fff; /* White text color for toast content */
+  }
+  

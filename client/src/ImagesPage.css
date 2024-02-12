@@ -1,0 +1,51 @@
+/* ImagesPage.css */
+.images-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .user-images{
+    margin: 20px;
+    text-align: center;
+  }
+  .user-container {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .user-info {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .image-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  h3{
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    margin-bottom: 10px;
+  }
+  .image-item {
+    list-style: none;
+    margin: 15px;
+    text-align: center;
+  }
+  
+  .image {
+    max-width: 150px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .uploaded-by,
+  .timestamp {
+    font-size: 16px;
+    color: #555;
+  }
